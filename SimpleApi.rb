@@ -12,19 +12,18 @@ end
 
 post '/GetFees' do
   push = JSON.parse(request.body.read)
-  customerType = push["CustomerType"]
-  content_type :json
   data = ReturnData.new
-  data.CustomerType = customerType
+  data.CustomerType = push["CustomerType"]
   data.Amount = 0
   data.Error = ""
+  content_type :json
 
-  if ($CustomerTypes.include?customerType) == false
+  if ($CustomerTypes.include?  data.CustomerType) == false
     data.Error = "customerType not found"
-    customerType = ""
+    data.CustomerType = ""
   end
 
-  if(customerType == "Paying")
+  if(  data.CustomerType == "Paying")
     data.Amount = Time.now.sec.abs
   end
 
