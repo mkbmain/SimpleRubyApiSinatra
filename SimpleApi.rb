@@ -15,7 +15,7 @@ post '/GetFees' do
   data.CustomerType = JSON.parse(request.body.read)["CustomerType"]
   data.Amount = 0
   data.Error = ""
-  content_type :json
+
 
   if ($CustomerTypes.include?  data.CustomerType) == false
     data.Error = "customerType not found"
@@ -26,6 +26,7 @@ post '/GetFees' do
     data.Amount = Time.now.sec.abs
   end
 
+  content_type :json
   return { CustomerTypes:data.CustomerType,
           Amount:data.Amount,
           Error:data.Error}.to_json
