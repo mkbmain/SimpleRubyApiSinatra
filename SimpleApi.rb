@@ -8,6 +8,8 @@ get '/GetAllCustomerTypes' do
   return { CustomerTypes: $CustomerTypes}.to_json
 end
 
+## nothing below here is used currently but for a future video
+
 post '/GetFees' do
   push = JSON.parse(request.body.read)
   customerType = push["CustomerType"]
