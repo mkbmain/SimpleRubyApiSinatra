@@ -11,9 +11,8 @@ end
 ## nothing below here is used currently but for a future video
 
 post '/GetFees' do
-  push = JSON.parse(request.body.read)
   data = ReturnData.new
-  data.CustomerType = push["CustomerType"]
+  data.CustomerType = JSON.parse(request.body.read)["CustomerType"]
   data.Amount = 0
   data.Error = ""
   content_type :json
