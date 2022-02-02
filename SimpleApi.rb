@@ -13,11 +13,7 @@ end
 post '/TestPost' do
 
   response = map_from_json_string(TestPostRequest.new, request.body.read)
-
-  if(response.Age > 55)
-    return { "message":"Over 55"}.to_json
-  end
-  return { "message":"55 or under"}.to_json
+  return { "message": response.Age > 55 ? 'Over 55' : '55 or under' }.to_json
 end
 
 get '/GetFees' do
@@ -33,9 +29,7 @@ get '/GetFees' do
     data.CustomerType = ''
   end
 
-  if(  data.CustomerType == 'Paying')
-    data.Amount = Time.now.sec.abs
-  end
+  data.Amount = Time.now.sec.abs if (  data.CustomerType == 'Paying')
 
   content_type :json
   return { CustomerTypes:data.CustomerType,
@@ -64,5 +58,5 @@ class ReturnData
 end
 
 class TestPostRequest
-  attr_accessor :exampleBody,:Age
+  attr_accessor :exampleBody,:Age,:log
 end
