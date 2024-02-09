@@ -27,12 +27,22 @@ post '/GetFees' do
   end
 
   content_type :json
-  return { CustomerTypes:data.CustomerType,
-          Amount:data.Amount,
-          Error:data.Error}.to_json
+  return data.to_json
 end
 
 
 class ReturnData
   attr_accessor :Error,:Amount,:CustomerType
+
+  def as_json(options={})
+    {
+      CustomerType: @CustomerType,
+      Amount: @Amount,
+      Error: @Error
+    }
+  end
+
+  def to_json(*options)
+    as_json(*options).to_json(*options)
+  end
 end
