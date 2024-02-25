@@ -22,7 +22,7 @@ post '/GetFees' do
     data.CustomerType = ""
   end
 
-  if(  data.CustomerType == "Paying")
+  if data.CustomerType == "Paying"
     data.Amount = Time.now.sec.abs
   end
 
